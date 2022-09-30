@@ -79,9 +79,8 @@ namespace WebApplication2.Controllers
 // Q6: GET: HostingCost
 public class HostingCostController : ApiController
 {
-    public string Get(double id)
+    public IEnumerable<string> Get(double id)
     {
-   
         var day = Math.Floor(id / 14)+1;
         var sub = day * 5.5;
         string money = sub.ToString("N2");
@@ -89,7 +88,8 @@ public class HostingCostController : ApiController
         var tax = (sub * 0.13);
         string HST ="HST 13% = $"+ tax.ToString("N2")+" CAD||";
         string Total = "Total=$" + (tax + sub).ToString("N2") + " CAD";
-        return Fee+"  "+HST+"  "+Total; 
+        IEnumerable<String> Output =new string[] { Fee, HST, Total };
+        return Output; 
         }
 }
 
